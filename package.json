@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "less": "^4.2.0",
@@ -12,8 +13,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
     "typescript": "^4.4.4",
     "vite": "^2.7.2",
+    "vitest": "^1.6.0",
     "vue-tsc": "^0.29.8"
   }
 }

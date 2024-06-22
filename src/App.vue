@@ -8,5 +8,6 @@
 import Game from './components/Game.vue'
 </script>
 
-<style scoped lang="less">
+<style>
+
 </style>
