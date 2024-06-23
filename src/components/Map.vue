@@ -4,14 +4,13 @@
         style="display: flex;" 
         v-for="row in map">
             <div v-for="j in row">
-            <component :is="getElComponent(j)" /> 
+                <component :is="getElComponent(j)" /> 
             </div>
         </div>
     </section>
 </template>
 <script setup lang="ts">
-import {initMap,type Element} from '../game/map';
-import { useMapStore } from '../store/map';
+import { useMapStore , type Assembly} from '../store/map';
 import Empty from './spare/Empty.vue';
 import Floor from './spare/Floor.vue';
 import Wall from './spare/Wall.vue';
@@ -23,8 +22,8 @@ import Cargo from './spare/Cargo.vue';
  * 2 地板
  * 3 箱子
  */
-const {rawMap} = useMapStore();
-let map = initMap(rawMap);
+const {initMap} = useMapStore();
+let map = initMap()
 
 
 /**
@@ -37,7 +36,7 @@ let imgEleComponentMap = {
     Wall,
     Cargo
 }
-function getElComponent (ele:Element) {
+function getElComponent (ele:Assembly) {
     return imgEleComponentMap[ele.name]
 }   
 </script>

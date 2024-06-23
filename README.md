@@ -4,6 +4,6 @@
 
 <!--
 src -> component:UI层
-src -> game:逻辑数据层
+src -> example:地图组件实例
 src -> store:全局数据管理
  -->
