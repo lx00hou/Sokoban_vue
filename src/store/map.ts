@@ -2,17 +2,15 @@ import { defineStore } from "pinia";
 import Wall from "../example/Wall";
 import Floor from "../example/Floor";
 import Empty from "../example/Empty";
-import Cargo from "../example/Cargo";
 interface posInterface  {
     x:number,
     y:number
 }
-export type Assembly = Wall | Floor | Empty | Cargo;   
+export type Assembly = Wall | Floor | Empty ;   
 export enum eleCode {
     'EMPTY' = 0,
     'WALL' = 1,
     'FLOOR' = 2,
-    'CARGO' = 3
 }
 
 export const useMapStore = defineStore('map',() => {
@@ -25,7 +23,7 @@ export const useMapStore = defineStore('map',() => {
      */
     const rawMap = [
         [0,0,1,1,1,1,1,0],
-        [1,1,1,3,2,2,1,0],
+        [1,1,1,2,2,2,1,0],
         [1,2,2,2,2,2,1,0],
         [1,1,1,2,2,2,1,0],
         [1,1,1,1,2,2,1,0],
@@ -49,8 +47,6 @@ export const useMapStore = defineStore('map',() => {
                     newMap[i][j] = new Wall();
                 }else if(el === eleCode.FLOOR){
                     newMap[i][j] = new Floor();
-                }else if(el === eleCode.CARGO){
-                    newMap[i][j] = new Cargo();
                 }
             })
         })

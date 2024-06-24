@@ -10,11 +10,11 @@
     </section>
 </template>
 <script setup lang="ts">
+import { type Component } from 'vue';
 import { useMapStore , type Assembly} from '../store/map';
 import Empty from './spare/Empty.vue';
 import Floor from './spare/Floor.vue';
 import Wall from './spare/Wall.vue';
-import Cargo from './spare/Cargo.vue';
 /** 
  * 初始化地图
  * 0 空白
@@ -30,11 +30,10 @@ let map = initMap()
  * 动态渲染组件
  * @param eleObj 
  */
-let imgEleComponentMap = {
+let imgEleComponentMap:Record<string,Component> = {
     Empty,
     Floor,
     Wall,
-    Cargo
 }
 function getElComponent (ele:Assembly) {
     return imgEleComponentMap[ele.name]
