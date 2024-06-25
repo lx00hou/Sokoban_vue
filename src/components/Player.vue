@@ -1,5 +1,5 @@
 <template>
-    <div :style="position" class="player">
+    <div :style="setPosition" class="absolute">
         <img :src="keeper" >
     </div>
 </template>
@@ -10,7 +10,7 @@ import { usePlayerStore } from '../store/player';
 
 
 useMove();
-let position = usePosition(); 
+let setPosition = usePosition(); 
 
 /**
  * 监听键盘移动事件
@@ -77,11 +77,8 @@ function usePosition(){
  </script>
 
 <style scoped lang="less">
-div {
-    position: absolute;
-    img {
-        display:block;
-    }
+img {
+    display:block;
 }
 </style>
  

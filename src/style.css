@@ -1,3 +1,6 @@
 .gameImg {
     display: block;
 }
+.absolute {
+    position: absolute;
+}
