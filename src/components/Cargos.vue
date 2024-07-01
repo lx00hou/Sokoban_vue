@@ -15,13 +15,13 @@
  */
  const { initCargos } = useCargoStore();
  let cargos = initCargos();   
-
+ 
  /**
   * 给箱子的位置赋值
   * @param cargoInfo
   * @return
   */
-function setPosition(cargoInfo:RawCargo){
+let setPosition = (cargoInfo:RawCargo) => {
     const STEP = 32; 
     let top = computed(() => cargoInfo.y * STEP);
     let left = computed(() => cargoInfo.x * STEP);

@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import { reactive } from "vue";
 export interface RawCargo {
     x:number,
-    y:number
+    y:number,
+    name?:string
 }
 
 // 箱子实例
@@ -21,16 +22,20 @@ export const useCargoStore = defineStore('cargos',() => {
     ])
     //  初始化实例
     function initCargos(){
-        let cargos:RawCargo[] = [];
-        cargoPosition.map((c) => {
-            let cargo = new Cargo();;
-            cargo.x = c.x;
-            cargo.y = c.y;
-            cargos.push(cargo)
+        // let cargos:RawCargo[] = [];
+        // cargoPosition.forEach((c) => {
+        //     let cargo = new Cargo();;
+        //     cargo.x = c.x;
+        //     cargo.y = c.y;
+        //     cargos.push(cargo)
+        // })
+        cargoPosition.forEach(i => {
+            let cargo = new Cargo();
+            i.name = cargo.name;
         })
-        return cargos
+        return cargoPosition
     }
-    
+
     return {
         cargoPosition,
         initCargos,
