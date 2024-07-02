@@ -36,9 +36,15 @@ export const useCargoStore = defineStore('cargos',() => {
         return cargoPosition
     }
 
+    // 通过x,y 获取当前是否有箱子
+    function getCargoByPosition(position:RawCargo){
+        return cargoPosition.find(i => i.x === position.x && i.y === position.y);
+    }
+
     return {
         cargoPosition,
         initCargos,
+        getCargoByPosition
     }
     
 })

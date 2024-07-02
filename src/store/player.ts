@@ -5,7 +5,7 @@ import { useCargoStore } from './cargos'
 
 export const usePlayerStore = defineStore('player',() => {
     let {isWall} = useMapStore();
-    let { cargoPosition } = useCargoStore();
+    let { cargoPosition,getCargoByPosition } = useCargoStore();
     let cargos = cargoPosition
     // 控制玩家所处的坐标位置
     let player = reactive({
@@ -22,8 +22,8 @@ export const usePlayerStore = defineStore('player',() => {
         if(isWall({x:player.x - 1,y:player.y})) return
         // 对箱子进行检测
         if(cargos){
-            let position = [player.x - 1,player.y];
-            let cargo = cargos.find(i => i.x === position[0] && i.y === position[1]);
+            let position = {x:player.x - 1,y:player.y};
+            let cargo = getCargoByPosition(position);
             if(cargo) {
                 cargo.x = cargo.x - 1;
             }
@@ -33,14 +33,30 @@ export const usePlayerStore = defineStore('player',() => {
     }
     const movePlayerToRight = () => {
         if(isWall({x:player.x + 1,y:player.y})) return
+        let position = {x:player.x + 1,y:player.y};
+        let cargo = getCargoByPosition(position);
+        if(cargo) {
+            cargo.x = cargo.x + 1;
+        }
+
         player.x = player.x +1;
     }
     const movePlayerToUp = () => {
         if(isWall({x:player.x,y:player.y - 1})) return
+        let position = {x:player.x,y:player.y - 1};
+        let cargo = getCargoByPosition(position);
+        if(cargo) {
+            cargo.y = cargo.y - 1;
+        }
         player.y = player.y -1;
     }
     const movePlayerToDown = () => {
         if(isWall({x:player.x,y:player.y + 1})) return
+        let position = {x:player.x,y:player.y + 1};
+        let cargo = getCargoByPosition(position);
+        if(cargo) {
+            cargo.y = cargo.y + 1;
+        }
         player.y = player.y +1;
     }
     
