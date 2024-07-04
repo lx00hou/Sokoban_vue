@@ -12,17 +12,18 @@ export const usePlayerStore = defineStore('player',() => {
         y:2
     })
     /**
-     * 控制人物移动
-     * 判断下一步是否会碰撞墙体
+     * 玩家 和 箱子移动  判断是否碰撞了墙体
      * @params
      * @returns 
      */
     const movePlayerToLeft = () => {
         let position = {x:player.x - 1,y:player.y};
-        if(isWall(position)) return
-        // 对箱子进行检测
+        if(isWall(position)) return   // 检测玩家移动是否碰撞墙体
         let cargo = getCargoByPosition(position);
         if(cargo) {
+            if(isWall({ x:player.x - 2,y:player.y})){   // 检测箱子移动是否碰撞墙体
+                return
+            }
             cargo.x = cargo.x - 1;
         }
     
@@ -33,6 +34,9 @@ export const usePlayerStore = defineStore('player',() => {
         if(isWall(position)) return
         let cargo = getCargoByPosition(position);
         if(cargo) {
+            if(isWall({ x:player.x + 2,y:player.y})){
+                return
+            }
             cargo.x = cargo.x + 1;
         }
 
@@ -43,6 +47,9 @@ export const usePlayerStore = defineStore('player',() => {
         if(isWall(position)) return
         let cargo = getCargoByPosition(position);
         if(cargo) {
+            if(isWall({ x:player.x,y:player.y - 2})){
+                return
+            }
             cargo.y = cargo.y - 1;
         }
         player.y = player.y -1;
@@ -52,6 +59,9 @@ export const usePlayerStore = defineStore('player',() => {
         if(isWall(position)) return
         let cargo = getCargoByPosition(position);
         if(cargo) {
+            if(isWall({ x:player.x,y:player.y + 2})){
+                return
+            }
             cargo.y = cargo.y + 1;
         }
         player.y = player.y +1;
