@@ -15,7 +15,7 @@ export enum Direction  {
  */
 export function useFighting(direction:Direction) {
     let {isWall} = useMapStore();    // 墙体碰撞
-    let { getCargoByPosition } = useCargoStore();  // 获取箱子位置
+    let { getCargoByPosition,boxCollisionBox } = useCargoStore();  // 获取箱子位置,以及箱子碰撞箱子检测方法
     let { player } = usePlayerStore();  // 获取玩家位置
 
     let map:Record<string,{
@@ -55,6 +55,9 @@ export function useFighting(direction:Direction) {
     let cargo = getCargoByPosition(playerPos);  // 获取箱子位置
     if(cargo){
         if(isWall(cargoPost)){   // 监测箱子的移动是否碰撞了墙体
+            return
+        }
+        if(boxCollisionBox(cargoPost)){    // 监测是否有箱子碰撞箱子的情况
             return
         }
         cargo[type] = cargo[type] + 1 * operator;

@@ -41,10 +41,21 @@ export const useCargoStore = defineStore('cargos',() => {
         return cargoPosition.find(i => i.x === position.x && i.y === position.y);
     }
 
+    /**
+     * 根据 x y 坐标判断 是否存在 箱子碰撞箱子的情况
+     * @param position
+     * @returns Boolean
+     */
+    function boxCollisionBox(position:RawCargo){
+        let cargoColl = cargoPosition.find(i => i.x === position.x && i.y === position.y);
+        return !!cargoColl
+    }
+
     return {
         cargoPosition,
         initCargos,
-        getCargoByPosition
+        getCargoByPosition,
+        boxCollisionBox
     }
     
 })

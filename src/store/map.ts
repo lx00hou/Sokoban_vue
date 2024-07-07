@@ -61,7 +61,7 @@ export const useMapStore = defineStore('map',() => {
     function isWall(position:posInterface){
         return rawMap[position.y][position.x] === eleCode.WALL
     }
-    
+
     return {
         rawMap,
         initMap,
