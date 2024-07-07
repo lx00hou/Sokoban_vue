@@ -1,6 +1,6 @@
 <template>
     <template v-for="cargo in cargos">
-        <div class="absolute" :style="setPosition(cargo)" >
+        <div class="absolute" :style="setPosition(cargo)" :x="cargo.x" :y="cargo.y">
             <img class="gameImg" :src="Cargo" alt="">
         </div>
     </template>

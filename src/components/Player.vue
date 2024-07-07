@@ -1,5 +1,5 @@
 <template>
-    <div :style="setPosition" class="absolute">
+    <div :style="setPosition" class="absolute" :x="player.x" :y="player.y" >
         <img :src="keeper" >
     </div>
 </template>
@@ -16,7 +16,6 @@ let setPosition = usePosition();
  * 监听键盘移动事件
  *@params {} 
  */
-
 
 function useMove(){
     let {
@@ -54,11 +53,8 @@ function useMove(){
  *@params {} 
  *@return {left,top} 
  */
-
+let {player} = usePlayerStore();
 function usePosition(){
-    let {
-        player,
-    } = usePlayerStore();
     const STEP = 32; 
     return computed(() => ({
         "left":player.x * STEP +'px',
