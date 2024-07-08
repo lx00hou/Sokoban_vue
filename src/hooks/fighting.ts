@@ -2,6 +2,7 @@ import { useMapStore } from '../store/map';
 import { useCargoStore } from '../store/cargos';
 import { RawCargo } from '../store/cargos'
 import { usePlayerStore } from '../store/player'
+import { usePlacePointStore } from '../store/placePoint';
 export enum Direction  {
     left = 'left',
     right = 'right',
@@ -17,6 +18,7 @@ export function useFighting(direction:Direction) {
     let {isWall} = useMapStore();    // 墙体碰撞
     let { getCargoByPosition,boxCollisionBox } = useCargoStore();  // 获取箱子位置,以及箱子碰撞箱子检测方法
     let { player } = usePlayerStore();  // 获取玩家位置
+    let { getPlacePointPos } = usePlacePointStore();   // 获取箱子放置点位置
 
     let map:Record<string,{
         playerPos:RawCargo,
@@ -61,6 +63,12 @@ export function useFighting(direction:Direction) {
             return
         }
         cargo[type] = cargo[type] + 1 * operator;
+        
+        // 检测箱子是否到达了放置点
+        let reach = getPlacePointPos().find(place => {
+            return place.x === cargo.x && place.y === cargo.y
+        })
+        cargo.onTarget = !!reach;
     }
 
     player[type]= player[type] +1 * operator;

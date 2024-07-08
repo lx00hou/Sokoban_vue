@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { reactive } from "vue";
 export type placePoint = {
     x:number,
-    y:number
+    y:number    
 }
 
 export const usePlacePointStore = defineStore('placePoint' ,() => {
@@ -13,7 +13,7 @@ export const usePlacePointStore = defineStore('placePoint' ,() => {
 
 
     // 获取放置点位置
-    function getPlacePointPos(position:placePoint) {
+    function getPlacePointPos() {
         return placePointPos
     }
 

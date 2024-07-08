@@ -3,6 +3,7 @@ import { reactive } from "vue";
 export interface RawCargo {
     x:number,
     y:number,
+    onTarget?:boolean,
     name?:string
 }
 
@@ -22,16 +23,10 @@ export const useCargoStore = defineStore('cargos',() => {
     ])
     //  初始化实例
     function initCargos(){
-        // let cargos:RawCargo[] = [];
-        // cargoPosition.forEach((c) => {
-        //     let cargo = new Cargo();;
-        //     cargo.x = c.x;
-        //     cargo.y = c.y;
-        //     cargos.push(cargo)
-        // })
+        let cargo = new Cargo();
         cargoPosition.forEach(i => {
-            let cargo = new Cargo();
             i.name = cargo.name;
+            i.onTarget = false;
         })
         return cargoPosition
     }

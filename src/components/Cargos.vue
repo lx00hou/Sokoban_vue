@@ -1,12 +1,14 @@
 <template>
     <template v-for="cargo in cargos">
         <div class="absolute" :style="setPosition(cargo)" :x="cargo.x" :y="cargo.y">
-            <img class="gameImg" :src="Cargo" alt="">
+            <img v-if="cargo.onTarget" class="gameImg" :src="cargoOnTarget " alt="">
+            <img v-else class="gameImg" :src="Cargo" alt="">
         </div>
     </template>
  </template>
  <script setup lang="ts">
  import Cargo from '../assets/cargo.png';
+ import cargoOnTarget from '../assets/cargoTarget.png'
  import { computed } from 'vue';
  import { useCargoStore , type RawCargo } from '../store/cargos'
 
