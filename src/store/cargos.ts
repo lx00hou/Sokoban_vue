@@ -19,7 +19,7 @@ export const useCargoStore = defineStore('cargos',() => {
     // 箱子所在的位置
     let cargoPosition:RawCargo[] = reactive([
         { x:3,y:2},
-        { x:1,y:6},
+        { x:4,y:6},
     ])
     //  初始化实例
     function initCargos(){
