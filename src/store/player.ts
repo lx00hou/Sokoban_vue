@@ -14,35 +14,18 @@ export const usePlayerStore = defineStore('player',() => {
      * @params
      * @returns 
      */
-    const movePlayerToLeft = () => {
-        useFighting(Direction.left);
-        // let position = {x:player.x - 1,y:player.y};
-        // if(isWall(position)) return   // 检测玩家移动是否碰撞墙体
-        // let cargo = getCargoByPosition(position);
-        // if(cargo) {
-        //     if(isWall({ x:player.x - 2,y:player.y})){   // 检测箱子移动是否碰撞墙体
-        //         return
-        //     }
-        //     cargo.x = cargo.x - 1;
-        // }
-    
-        // player.x = player.x -1;
-    }
-    const movePlayerToRight = () => {
-        useFighting(Direction.right)
-    }
-    const movePlayerToUp = () => {
-        useFighting(Direction.up)
-    }
-    const movePlayerToDown = () => {
-        useFighting(Direction.down)
+    const movePlayer = (keyBoard:KeyboardEvent) => {
+        let gather:Record<string,keyof typeof Direction> = {
+            ArrowLeft:'left',
+            ArrowRight:'right',
+            ArrowUp:'up',
+            ArrowDown:'down',
+        }
+        useFighting(Direction[gather[keyBoard.code]]);
     }
     return {
         player,
-        movePlayerToLeft,
-        movePlayerToRight,
-        movePlayerToUp,
-        movePlayerToDown
+        movePlayer,
     }
     
 })

@@ -19,32 +19,13 @@ let setPosition = usePosition();
 
 function useMove(){
     let {
-        movePlayerToLeft,
-        movePlayerToRight,
-        movePlayerToUp,
-        movePlayerToDown
+        movePlayer
     } = usePlayerStore();
     onMounted(() => window.addEventListener('keyup', handleKeyUp))
     onUnmounted(() => window.removeEventListener('keyup', handleKeyUp));
     
     let handleKeyUp = (e:KeyboardEvent) => {
-        switch (e.code) {
-            case 'ArrowLeft':
-                movePlayerToLeft();
-                break;
-            case 'ArrowRight':
-                movePlayerToRight();
-                break;
-            case 'ArrowUp':
-                movePlayerToUp();
-                break;
-            case 'ArrowDown':
-                movePlayerToDown();
-                break;
-        
-            default:
-                break;
-        }
+        movePlayer(e)
     }
 }
 
