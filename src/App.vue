@@ -1,11 +1,11 @@
 <template>
   <main>
-    <Game />
+     <router-view></router-view>
   </main>
 </template>
 
 <script setup lang="ts">
-import Game from './components/Game.vue'
+// import Game from './view/Game.vue'
 </script>
 
 <style>

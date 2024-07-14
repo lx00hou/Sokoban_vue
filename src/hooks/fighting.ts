@@ -53,7 +53,9 @@ export function useFighting(direction:Direction) {
             operator: 1
         }
     }
-
+    if(!map[direction]){
+        return
+    }
     let { playerPos,cargoPost,type, operator }  = map[direction];
     if(isWall(playerPos)) return   // 监测玩家移动是否碰撞了墙体
     let cargo = getCargoByPosition(playerPos);  // 获取箱子位置
