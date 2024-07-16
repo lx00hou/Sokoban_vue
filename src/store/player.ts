@@ -11,8 +11,7 @@ export const usePlayerStore = defineStore('player',() => {
     })
     /**
      * 玩家 和 箱子移动  判断是否碰撞了墙体
-     * @params
-     * @returns 
+     * @params KeyboardEvent
      */
     const movePlayer = (keyBoard:KeyboardEvent) => {
         let gather:Record<string,keyof typeof Direction> = {
