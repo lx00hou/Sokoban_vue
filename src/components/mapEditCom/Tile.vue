@@ -10,10 +10,10 @@ interface Prop {
 }
 defineProps<Prop>();
 const emit = defineEmits(['selTail']);
-
 const handleClick = (title:string) => {
     emit('selTail',title)
 }
+
 </script>
 
 <style scoped>
@@ -24,6 +24,7 @@ div {
 }
 img {
     width: 100%;
+    cursor: pointer;
 }
 </style>
 

@@ -22,13 +22,14 @@ import floor from '../assets/floor.png';
 import wall from '../assets/wall.png';
 import MapBlock from '../components/mapEditCom/mapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 
 // 设置行列数量
 const rows = ref(10);
 const cols = ref(10);
 // 当前选中的地图组件
 const curSelTail = ref("");
+provide('getSelectTail',curSelTail)
 </script>
 
 <style scoped>
@@ -44,6 +45,7 @@ main {
 }
 .sel {
     margin-top: 20px;
+    cursor: pointer;
 }
 </style>
 
