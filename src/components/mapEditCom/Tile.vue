@@ -25,6 +25,7 @@ div {
 img {
     width: 100%;
     cursor: pointer;
+    user-select: none;
 }
 </style>
 

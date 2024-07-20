@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <section class="content">
         <!-- 地图编辑区域 -->
         <div class="mapEditArea" v-for="row in rows">
             <div v-for="j in cols">
@@ -15,7 +15,7 @@
         <section class="sel" v-if="curSelTail" >
             您当前选中了: {{ curSelTail }}
         </section>
-    </main>
+    </section>
 </template>
 <script setup lang="ts">
 import floor from '../assets/floor.png';
@@ -33,8 +33,9 @@ provide('getSelectTail',curSelTail)
 </script>
 
 <style scoped>
-main {
+.content {
     position: relative;
+    user-select: none;
 }
 .mapEditArea {
     display: flex;
