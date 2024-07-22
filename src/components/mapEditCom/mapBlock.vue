@@ -39,13 +39,17 @@ let {  start , move , end } = useCollectStore();
 const handleMove = () => {
     move(handleSetTail)
 }
+
 const handleDown = () => {
+    if(!['墙体','地板'].includes(tail.value) ){
+        return
+    }
     start();
-    // document.addEventListener('mouseup',handleUp)
+    document.addEventListener('mouseup',handleUp)
 }
 const handleUp = () => {
     end();
-    // document.removeEventListener('mouseup',handleUp)
+    document.removeEventListener('mouseup',handleUp)
 }
 
 </script>
