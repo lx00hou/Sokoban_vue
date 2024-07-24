@@ -3,9 +3,24 @@
         <!-- 地图编辑区域 -->
         <div class="mapEditArea" v-for="row in rows">
             <div v-for="j in cols">
-                <MapBlock />
+                <MapBlock :x="j - 1" :y="row - 1" @curPosition = "getPosition"/>
             </div>
         </div>
+        <!--
+            地图渲染其他组件 
+         -->
+        <div class="show keepShow" >
+            <img :src="keeperPlayer" alt="">
+        </div>
+
+        <div class="show cargoShow" >
+            <img :src="cargo" alt="">
+        </div>
+
+        <div class="show cargoTargetShow" >
+            <img :src="cargoTarget" alt="">
+        </div>
+
         <!-- 选择地图组件 -->
         <section class="mapComponent">
             <Tile title="地板" :imgSrc="floor" @selTail="title => curSelTail = title" />
@@ -34,7 +49,7 @@ import wall from '../assets/wall.png';
 import keeperPlayer from '../assets/keeper.png';
 import cargo from '../assets/cargo.png';
 import cargoTarget from '../assets/cargoTarget.png'
-import MapBlock from '../components/mapEditCom/mapBlock.vue';
+import MapBlock from '../components/mapEditCom/MapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
 
 // 设置行列数量
@@ -53,31 +68,60 @@ enum mapOther  {
 const changeOther = (value:keyof typeof mapOther) => {
     curSelTail.value = mapOther[value]
 }
+
+// 获取当前点击位置
+const getPosition = (position:{
+    x:number,
+    y:number
+}) => {
+    console.log('获取位置',position);
+    console.log('当前选中的组件',curSelTail.value);
+}
 </script>
 
-<style scoped>
+<style scoped lang="less">
+
 .content {
     position: relative;
     user-select: none;
+    .mapEditArea {
+        display: flex;
+    }
+    .mapComponent {
+        display: flex;
+        margin-top: 30px;
+        .other {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+
+    .show  {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+        display: none;
+        img {
+            width: 100%;
+        }
+    }
+
+    .sel {
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
 }
-.mapEditArea {
-    display: flex;
-}
-.mapComponent {
-    display: flex;
-    margin-top: 30px;
-}
-.sel {
-    margin-top: 20px;
-    cursor: pointer;
-}
-.other {
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-.other img {
-    width: 100%;
-}
+
+
+
+
+
+
 </style>
 

@@ -20,6 +20,10 @@ import { inject,ref,Ref } from 'vue';
 import { useCollectStore } from '../../store/collectMapBlock';
 import Wall from '../../assets/wall.png';
 import Floor from '../../assets/floor.png';
+type positionType = {
+    x:number,
+    y:number
+}
 
 const tail:Ref<string> = inject('getSelectTail')!   // 获取当前选中的tile
 enum TileEnum {
@@ -27,11 +31,17 @@ enum TileEnum {
    WALL,
    FLOOR 
 }
+const position = defineProps<positionType>()
+const emit = defineEmits(['curPosition'])
 let typeTail:Ref<number> = ref(0);
 const handleSetTail = () => {
     typeTail.value = tail.value === '墙体' ? 
                      TileEnum.WALL :  tail.value === '地板' ?
                      TileEnum.FLOOR : TileEnum.EMPTY;
+
+    if(typeTail.value === TileEnum.EMPTY){
+        emit('curPosition',position);
+    }
 }
 
 // 鼠标移动 给地图编辑器 赋值 tile
