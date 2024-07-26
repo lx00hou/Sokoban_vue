@@ -69,6 +69,7 @@ div{
     width: 50px;
     height: 50px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 img{
     width: 50px;

@@ -9,15 +9,15 @@
         <!--
             地图渲染其他组件 
          -->
-        <div class="show keepShow" >
+        <div :style="setPosition" class="show playerShow " v-if="playerIsShow" >
             <img :src="keeperPlayer" alt="">
         </div>
 
-        <div class="show cargoShow" >
+        <div class="show cargoShow"  v-if="cargoIsShow" >
             <img :src="cargo" alt="">
         </div>
 
-        <div class="show cargoTargetShow" >
+        <div class="show cargoTargetShow"  v-if="cargoTargetIsShow" >
             <img :src="cargoTarget" alt="">
         </div>
 
@@ -43,7 +43,7 @@
     </section>
 </template>
 <script setup lang="ts">
-import { provide, ref } from 'vue';
+import { provide, ref,Ref ,computed ,reactive} from 'vue';
 import floor from '../assets/floor.png';
 import wall from '../assets/wall.png';
 import keeperPlayer from '../assets/keeper.png';
@@ -70,12 +70,38 @@ const changeOther = (value:keyof typeof mapOther) => {
 }
 
 // 获取当前点击位置
+const playerIsShow:Ref<Boolean> = ref(false);
+const cargoIsShow:Ref<Boolean> = ref(false);
+const cargoTargetIsShow:Ref<Boolean> = ref(false);
+const player = reactive({
+    x:0,
+    y:0
+})
+
 const getPosition = (position:{
     x:number,
     y:number
 }) => {
-    console.log('获取位置',position);
-    console.log('当前选中的组件',curSelTail.value);
+    player.x = position.x;
+    player.y = position.y;
+    // console.log('获取位置',position);
+    // console.log('当前选中的组件',curSelTail.value);
+    if(curSelTail.value === '玩家'){
+        playerIsShow.value = true;
+    }else if(curSelTail.value === '箱子'){
+        cargoIsShow.value = true;
+    }else if(curSelTail.value === '放置点'){
+        cargoTargetIsShow.value = true;
+    }
+}
+const setPosition = usePosition();
+function usePosition(){
+    const STEP = 50; 
+    return computed(() => ({
+        "left":player.x * STEP +'px',
+        "top":player.y * STEP +'px',
+    }));
+
 }
 </script>
 
@@ -102,13 +128,16 @@ const getPosition = (position:{
 
 
     .show  {
-        width: 80px;
-        height: 80px;
+        width: 50px;
+        height: 50px;
         margin-right: 10px;
-        display: none;
+        position: absolute;
         img {
             width: 100%;
         }
+    }
+    .playerShow,.cargoShow,.cargoTargetShow {
+        margin-right: 0;
     }
 
     .sel {
