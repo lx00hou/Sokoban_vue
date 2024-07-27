@@ -9,15 +9,24 @@
         <!--
             地图渲染其他组件 
          -->
-        <div :style="setPosition" class="show playerShow " v-if="playerIsShow" >
+        <div :style="setPosition" class="show playerShow "
+            v-show="player.x !== 0 || player.y !== 0"
+        >
             <img :src="keeperPlayer" alt="">
         </div>
 
-        <div class="show cargoShow"  v-if="cargoIsShow" >
+        <div class="show cargoShow" 
+        :style="setCargoPosition(cargoItem)"
+        v-for="cargoItem of cargoPosition"
+        v-show="cargoPosition.length > 0"
+        >
             <img :src="cargo" alt="">
         </div>
 
-        <div class="show cargoTargetShow"  v-if="cargoTargetIsShow" >
+        <div class="show cargoTargetShow" 
+        v-for="cargoTargetItem of cargoTargetPosition"
+        :style="setCargoPosition(cargoTargetItem)"
+        v-show="cargoTargetPosition.length > 0"  >
             <img :src="cargoTarget" alt="">
         </div>
 
@@ -64,45 +73,49 @@ enum mapOther  {
     cargo = "箱子",
     cargoTarget = "放置点"
 }
-
 const changeOther = (value:keyof typeof mapOther) => {
     curSelTail.value = mapOther[value]
 }
 
-// 获取当前点击位置
-const playerIsShow:Ref<Boolean> = ref(false);
-const cargoIsShow:Ref<Boolean> = ref(false);
-const cargoTargetIsShow:Ref<Boolean> = ref(false);
-const player = reactive({
+type positionType = {
+    x:number,
+    y:number
+}
+let player:positionType = reactive({
     x:0,
     y:0
 })
+let cargoPosition:positionType[] = reactive([])
+let cargoTargetPosition:positionType[] = reactive([])
 
+const STEP = 50; 
 const getPosition = (position:{
     x:number,
     y:number
 }) => {
-    player.x = position.x;
-    player.y = position.y;
-    // console.log('获取位置',position);
-    // console.log('当前选中的组件',curSelTail.value);
     if(curSelTail.value === '玩家'){
-        playerIsShow.value = true;
+        player.x = position.x;
+        player.y = position.y;
     }else if(curSelTail.value === '箱子'){
-        cargoIsShow.value = true;
+        cargoPosition.push({
+            x:position.x,
+            y:position.y
+        })
     }else if(curSelTail.value === '放置点'){
-        cargoTargetIsShow.value = true;
+        cargoTargetPosition.push({
+            x:position.x,
+            y:position.y
+        })
     }
 }
-const setPosition = usePosition();
-function usePosition(){
-    const STEP = 50; 
-    return computed(() => ({
-        "left":player.x * STEP +'px',
-        "top":player.y * STEP +'px',
-    }));
-
-}
+const setPosition = computed(() => ({
+    "left":player.x * STEP +'px',
+    "top":player.y * STEP +'px',
+}));;
+const setCargoPosition = (position:positionType) => ({
+    "left":position.x * STEP +'px',
+    "top":position.y * STEP +'px',
+})
 </script>
 
 <style scoped lang="less">
