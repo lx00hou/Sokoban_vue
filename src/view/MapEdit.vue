@@ -27,7 +27,7 @@
         v-for="cargoTargetItem of cargoTargetPosition"
         :style="setCargoPosition(cargoTargetItem)"
         v-show="cargoTargetPosition.length > 0"  >
-            <img :src="cargoTarget" alt="">
+            <img :src="target" alt="">
         </div>
 
         <!-- 选择地图组件 -->
@@ -41,8 +41,8 @@
             <div class="other" @click="changeOther('cargo')" >
                 <img :src="cargo" alt="">
             </div>
-            <div class="other" @click="changeOther('cargoTarget')" >
-                <img :src="cargoTarget" alt="">
+            <div class="other" @click="changeOther('target')" >
+                <img :src="target" alt="">
             </div>
         </section>
 
@@ -52,11 +52,12 @@
     </section>
 </template>
 <script setup lang="ts">
-import { provide, ref,Ref ,computed ,reactive} from 'vue';
+import { provide, ref ,computed ,reactive} from 'vue';
 import floor from '../assets/floor.png';
 import wall from '../assets/wall.png';
 import keeperPlayer from '../assets/keeper.png';
 import cargo from '../assets/cargo.png';
+import target from '../assets/target.png'
 import cargoTarget from '../assets/cargoTarget.png'
 import MapBlock from '../components/mapEditCom/MapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
@@ -71,7 +72,7 @@ provide('getSelectTail',curSelTail)
 enum mapOther  {
     keeperPlayer  =  "玩家",
     cargo = "箱子",
-    cargoTarget = "放置点"
+    target = "放置点"
 }
 const changeOther = (value:keyof typeof mapOther) => {
     curSelTail.value = mapOther[value]
