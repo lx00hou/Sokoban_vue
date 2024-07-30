@@ -58,7 +58,6 @@ import wall from '../assets/wall.png';
 import keeperPlayer from '../assets/keeper.png';
 import cargo from '../assets/cargo.png';
 import target from '../assets/target.png'
-import cargoTarget from '../assets/cargoTarget.png'
 import MapBlock from '../components/mapEditCom/MapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
 
