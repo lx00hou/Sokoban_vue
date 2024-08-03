@@ -1,11 +1,14 @@
 <template>
     <section class="content">
         <!-- 地图编辑区域 -->
-        <div class="mapEditArea" v-for="row in rows">
-            <div v-for="j in cols">
-                <MapBlock :x="j - 1" :y="row - 1" @curPosition = "getPosition"/>
+        <section>
+            <div class="mapEditArea" v-for="row in rows">
+                <div v-for="j in cols">
+                    <MapBlock :x="j - 1" :y="row - 1" @curPosition = "getPosition"/>
+                </div>
             </div>
-        </div>
+        </section>
+        <MapJson />
         <!--
             地图渲染其他组件 
          -->
@@ -60,6 +63,7 @@ import cargo from '../assets/cargo.png';
 import target from '../assets/target.png'
 import MapBlock from '../components/mapEditCom/MapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
+import MapJson from '../components/mapEditCom/MapJson.vue';
 
 // 设置行列数量
 const rows = ref(10);
