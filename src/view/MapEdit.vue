@@ -64,7 +64,7 @@ import target from '../assets/target.png'
 import MapBlock from '../components/mapEditCom/MapBlock.vue';
 import Tile from '../components/mapEditCom/Tile.vue'
 import MapJson from '../components/mapEditCom/MapJson.vue';
-
+import { useMapGameJson , type positionType } from '../store/mapGameJson'
 // 设置行列数量
 const rows = ref(10);
 const cols = ref(10);
@@ -81,17 +81,7 @@ const changeOther = (value:keyof typeof mapOther) => {
     curSelTail.value = mapOther[value]
 }
 
-type positionType = {
-    x:number,
-    y:number
-}
-let player:positionType = reactive({
-    x:0,
-    y:0
-})
-let cargoPosition:positionType[] = reactive([])
-let cargoTargetPosition:positionType[] = reactive([])
-
+const {player,cargoPosition,cargoTargetPosition} = useMapGameJson();
 const STEP = 50; 
 const getPosition = (position:{
     x:number,
